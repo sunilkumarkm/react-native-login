@@ -1,15 +1,15 @@
 import { createStackNavigator } from 'react-navigation';
 import Colors from '../style/color';
 // Screens
-import Location from '../components/Location';
+import Dashboard from '../components/Dashboard';
 
 const routeConfiguration = {
-  Location: { screen: Location }
+  Dashboard: { screen: Dashboard }
 };
 
 // going to disable the header for now
 const stackNavigatorConfiguration = {
-  initialRouteName: 'Location',
+  initialRouteName: 'Dashboard',
   defaultNavigationOptions: {
     headerStyle: {
       backgroundColor: Colors.primary
@@ -23,9 +23,9 @@ const stackNavigatorConfiguration = {
   }
 };
 
-const LocationStack = createStackNavigator(
+const DashboardStack = createStackNavigator(
   routeConfiguration,
   stackNavigatorConfiguration
 );
 
-export default LocationStack;
+export default DashboardStack;

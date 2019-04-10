@@ -1,16 +1,14 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, Image, Dimensions } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { actions, getAuthState } from '../../reducers/login';
+import { actions } from '../../reducers/login';
 import LoginForm from './LoginForm';
 import { RS } from '../../utils/UtilityFunctions';
 import Colors from '../../style/color';
 import Loader from '../../common/Loader';
-import { api } from '../../api/apiService';
-
-const { width } = Dimensions.get('window');
+import { NotificationAlert } from '../../utils/UtilityFunctions';
 
 class Login extends PureComponent {
   static navigationOptions = {
@@ -22,38 +20,32 @@ class Login extends PureComponent {
     this.state = {
       loading: false,
       initValues: {
-        username: 'User1',
-        password: 'use@lib'
+        username: 'hruday@gmail.com',
+        password: 'hruday123'
+      },
+      data: {
+        username: 'hruday@gmail.com',
+        password: 'hruday123'
       }
     };
   }
 
-  async componentDidMount() {
-    const { token } = this.props.auth;
-    console.log('is Logged', token);
-    if (token) {
-      api.setHeader('Authorization', `Bearer ${token}`);
-      this.props.navigation.navigate('App');
-    }
-  }
-
   loginUser = values => {
-    this.props.login(values);
+    const { data } = this.state;
+    if (values.username.toLowerCase() === data.username && data.password === data.password) {
+      this.props.navigation.navigate('App')
+    } else {
+      const errorMsg = "Invalid username or password";
+      NotificationAlert('Login Error', errorMsg);
+    }
   };
 
   render() {
     const { isLoading } = this.props.auth;
     return (
       <View style={styles.container}>
-       {/*  <Image
-          style={{
-            width: width,
-            height: 60,
-            padding: 10,
-            resizeMode: 'contain'
-          }}
-          source={require('./img/logo.jpg')}
-        /> */}
+        <Text style={styles.title}>LOGIN</Text>
+
         <LoginForm
           title="LOGIN"
           onSubmit={this.loginUser}
@@ -76,11 +68,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: Colors.primary,
     textAlign: 'center'
-  }
+  },
+  title: { textAlign: 'center', fontSize: 32, fontWeight: 'bold', color: Colors.primary, padding: 10 }
+
 });
 
 const mapStateToProps = state => ({
-  auth: getAuthState(state)
+  auth: state.auth
 });
 
 const mapDispatchToProps = dispatch => ({

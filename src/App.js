@@ -11,7 +11,7 @@ import Colors from './style/color';
 import Loader from './common/Loader';
 
 const { store, persistor } = configureStore();
-
+persistor.purge();
 export default class App extends Component {
   render() {
     return (

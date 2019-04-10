@@ -7,13 +7,13 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Colors from '../style/color';
 import { RS } from '../utils/UtilityFunctions';
 import TabBarComponent from '../common/TabBar';
-import LocationStack from './locationStack';
+import dashboardStack from './dashboardStack';
 import ProfileStack from './profileStack';
 
 const isAndroid = Platform.OS === 'android';
 
 const routeConfiguration = {
-  Location: { screen: LocationStack },
+  Dashboard: { screen: dashboardStack },
   Profile: { screen: ProfileStack },
 };
 
@@ -25,7 +25,7 @@ const tabBarConfiguration = {
       const focus = Platform.OS === 'ios' ? focused : true;
       const { routeName } = navigation.state;
       let iconName;
-      if (routeName === 'Complaints') {
+      if (routeName === 'Dashboard') {
         iconName = isAndroid ? 'md-document' : `ios-document${focus ? '' : '-outline'}`;
       } if (routeName === 'Profile') {
         iconName = isAndroid ? 'md-person' : `ios-person${focus ? '' : '-outline'}`;

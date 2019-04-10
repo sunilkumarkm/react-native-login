@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { RS } from '../utils/UtilityFunctions';
 import Colors from '../style/color';
 import HzButton from '../common/HzButton';
-import { actions, getAuthState } from '../reducers/login';
+import { actions } from '../reducers/login';
 
 class Profile extends PureComponent {
   static navigationOptions = {
@@ -41,15 +41,11 @@ class Profile extends PureComponent {
       <Card title="User Details" containerStyle={styles.container}>
         <View style={styles.textHolder}>
           <Text style={styles.item}>Name</Text>
-          <Text style={styles.item}>{user.name}</Text>
-        </View>
-        <View style={styles.textHolder}>
-          <Text style={styles.item}>Email</Text>
-          <Text style={styles.item}>{user.email}</Text>
+          <Text style={styles.item}>hruday@gmail.com</Text>
         </View>
         <View style={styles.textHolder}>
           <Text style={styles.item}>Role</Text>
-          <Text style={styles.item}>{user.role}</Text>
+          <Text style={styles.item}>user</Text>
         </View>
         <View style={{ paddingVertical: 25 }}>
           <HzButton title="LOG OUT" onPress={this.logout} />
@@ -82,7 +78,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  profile: getAuthState(state)
+  profile: state.auth
 });
 
 const mapDispatchToProps = dispatch => ({
